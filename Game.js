@@ -15,13 +15,6 @@ TreeRings.Game.prototype = {
 	
 	buildWorld: function() {
 		this.add.image(0, 0, 'game_bg');
-
-        var baseRadius = 12;    
-        this.a_tree = new Tree(this, 650, 250,baseRadius,a_activeClimateHistory);
-        this.add.existing(this.a_tree);
-        
-		// Insert image of target tree ring pattern user should try to match
-		this.add.image(650, 51, 'tree_ring_sample');
         
 		// Text for growing one year
 		var style = { font: "24px Arial", fill: "#006600", align: "center" };
@@ -56,6 +49,14 @@ TreeRings.Game.prototype = {
         swapBtn.name = 'swapButton';
         // anchored on the center of the button
         swapBtn.anchor.setTo(0.5, 0.5);
+        
+
+        var baseRadius = 12;    
+        this.a_tree = new Tree(this, 650, 250,baseRadius,a_activeClimateHistory);
+        this.add.existing(this.a_tree);
+        
+		// Insert image of target tree ring pattern user should try to match
+		this.add.image(650, 51, 'tree_ring_sample');
 
 	},
 	init: function() {

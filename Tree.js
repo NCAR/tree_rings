@@ -1,9 +1,10 @@
 // Tree object
-Tree = function(game, x, y, value, climateHistory) {
+// game object, x coord, y coord, radius, climateHistory object
+Tree = function(game, x, y, radius, climateHistory) {
     Phaser.Graphics.call(this, game, x, y, 'tree');
     this.i_radius = 0;
     this.a_rings = [];
-    this.baseRadius = value;
+    this.baseRadius = radius;
     this.a_climateHistory = climateHistory;
 }
 
