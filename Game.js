@@ -1,6 +1,10 @@
+a_climateHistory = new ClimateHistory();
+a_climateHistoryTarget = new ClimateHistory();
+a_activeClimateHistory = a_climateHistory;
+b_climateFlag = 'user';
+
 TreeRings.Game = function(game) {
-	// variables
-	// this.var_name;
+	this.buildTarget();
 };
 
 TreeRings.Game.prototype = {
@@ -11,72 +15,49 @@ TreeRings.Game.prototype = {
 	
 	buildWorld: function() {
 		this.add.image(0, 0, 'game_bg');
-		
-		// Insert calendar sprite/button
-		var growSprite = this.add.sprite(50, 50, 'calendar_icon');
-        growSprite.inputEnabled = true; // indicate that the sprite can have click/touch input events
-        growSprite.events.onInputDown.add(this.growSpriteListener,this); // phaser events: http://phaser.io/docs/2.4.2/Phaser.Events.html
-		
-		// Text beneath calendar sprite
-		var style = { font: "24px Arial", fill: "#006600", align: "center" };
-		var text = this.add.text(50, 200, "Grow One Year", style);
-		
+
+        var baseRadius = 12;    
+        this.a_tree = new Tree(this, 650, 250,baseRadius,a_activeClimateHistory);
+        this.add.existing(this.a_tree);
+        
 		// Insert image of target tree ring pattern user should try to match
 		this.add.image(650, 51, 'tree_ring_sample');
-		
+        
+		// Text for growing one year
+		var style = { font: "24px Arial", fill: "#006600", align: "center" };
+		var text = this.add.text(50, 20, "Grow One Year", style);
         
 		// Insert Grow One Year button
-       	var growBtn = this.add.button(150, 300, 'button_spritesheet', this.debug, this, 2, 1, 0);
+       	var growBtn = this.add.button(150, 100, 'button_spritesheet', this.growRingListener, this, 2, 1, 0);
         //growBtn = this.add.button(this.world.centerX, this.world.centerY, 'buttonGeneric', this.debug, this, 2, 1, 0);
         growBtn.name = 'growButton';
         // anchored on the center of the button
         growBtn.anchor.setTo(0.5, 0.5);
+                
+        // text for undo one year
+        var style = { font: "24px Arial", fill: "#006600", align: "center" };
+		var text = this.add.text(50, 175, "Remove One Year", style);
         
-		// Graphics objects
+        // Insert undo One Year button
+       	var undoBtn = this.add.button(150, 250, 'button_spritesheet', this.undoRingListener, this, 2, 1, 0);
+        //growBtn = this.add.button(this.world.centerX, this.world.centerY, 'buttonGeneric', this.debug, this, 2, 1, 0);
+        undoBtn.name = 'undoButton';
+        // anchored on the center of the button
+        undoBtn.anchor.setTo(0.5, 0.5);
         
-        // Curved line arc
-        /*var treeRingArc = this.add.graphics(400, 250);
-        treeRingArc.lineStyle(8, 0x339933);
-        treeRingArc.arc(0, 0, 100, Math.PI/2, 3*Math.PI/2, false);*/
-		
-		// Filled semi-circle
-        /*var treeRingSemiCircle = this.add.graphics(400, 250);
-		treeRingSemiCircle.beginFill(0x996633);
-		treeRingSemiCircle.arc(0, 0, 50, Math.PI/2, 3*Math.PI/2);
-		treeRingSemiCircle.endFill();*/
-		
-		// Add new ring with early/light and late/dark growth
-		//this.addTreeRing();
+        
+        // text for swapping
+        var style = { font: "24px Arial", fill: "#006600", align: "center" };
+		var text = this.add.text(50, 320, "Swap Tree", style);
+        
+        // Insert Swap button
+       	var swapBtn = this.add.button(150, 400, 'button_spritesheet', this.swapClimateListener, this, 2, 1, 0);
+        //growBtn = this.add.button(this.world.centerX, this.world.centerY, 'buttonGeneric', this.debug, this, 2, 1, 0);
+        swapBtn.name = 'swapButton';
+        // anchored on the center of the button
+        swapBtn.anchor.setTo(0.5, 0.5);
+
 	},
-	
-	addTreeRing: function() {
-		//var treeRing = ;
-		
-		//this.playerTreeRings.addChild(treeRing);
-		
-		var treeRing = this.add.graphics(650, 250);
-		
-		// Dark, late growth
-		treeRing.beginFill(0x996633);
-		treeRing.arc(0, 0, 22, Math.PI/2, 3*Math.PI/2);
-		treeRing.endFill();
-		
-		// Early, light growth
-		treeRing.beginFill(0xcccc99);
-		treeRing.arc(0, 0, 20, Math.PI/2, 3*Math.PI/2);
-		treeRing.endFill();
-		
-		// Dark, late growth
-		treeRing.beginFill(0x996633);
-		treeRing.arc(0, 0, 12, Math.PI/2, 3*Math.PI/2);
-		treeRing.endFill();
-		
-		// Early, light growth
-		treeRing.beginFill(0xcccc99);
-		treeRing.arc(0, 0, 10, Math.PI/2, 3*Math.PI/2);
-		treeRing.endFill();
-	},
-	
 	init: function() {
 		
 	},
@@ -114,14 +95,76 @@ TreeRings.Game.prototype = {
 	update: function () {
 		
 	},
-    
+    buildTarget: function(){
+        a_climateHistoryTarget.resetClimateHistory();
+        // initiate the Target
+        //1
+        a_climateHistoryTarget.addYear('normal','normal');
+        //2
+        a_climateHistoryTarget.addYear('warm','normal');
+        //3
+        a_climateHistoryTarget.addYear('normal','normal');
+        //4
+        a_climateHistoryTarget.addYear('warm','normal');
+        //5
+        a_climateHistoryTarget.addYear('warm','dry');
+        //6
+        a_climateHistoryTarget.addYear('warm','dry');
+        //7
+        a_climateHistoryTarget.addYear('normal','dry');
+        //8
+        a_climateHistoryTarget.addYear('normal','normal');
+        //9
+        a_climateHistoryTarget.addYear('warm','normal');
+        //10
+        a_climateHistoryTarget.addYear('normal','normal');
+        //11
+        a_climateHistoryTarget.addYear('cool','wet');
+        //12
+        a_climateHistoryTarget.addYear('normal','normal');
+        //13
+        a_climateHistoryTarget.addYear('warn','normal');
+        //14
+        a_climateHistoryTarget.addYear('warm','wet');
+        // 15    
+        a_climateHistoryTarget.addYear('warm','wet');
+    },
     /* listener functions */
-    
-    growSpriteListener: function(){
-        this.debug();
+    undoRingListener:  function(){
+       if(this.a_tree.getRings().length > 0){
+            this.a_tree.removeRing();
+            a_activeClimateHistory.removeYear();
+        }
+    },
+    growRingListener: function(){
+        this.a_tree.addRing();
+
+        // for now, just randomly picking temperature and precipitation
+        // ultimately this will be retrieved from user manipulated input
+        a_activeClimateHistory.addYear(randomProperty(a_activeClimateHistory.getTemperatures()),randomProperty(a_activeClimateHistory.getPrecipitation()));
+    } ,
+    swapClimateListener:  function(){
+        
+        if(b_climateFlag == 'target'){
+            b_climateFlag = 'user';
+            a_activeClimateHistory = a_climateHistory;
+            // we are now using the user submitted climate
+            // reset target
+            this.buildTarget();
+        } else {
+            b_climateFlag = 'target';
+            a_activeClimateHistory = a_climateHistoryTarget;
+            // we are now using the target climate
+        }
+            this.a_tree.changeClimateHistory(a_activeClimateHistory);
     },
     debug: function(){
-        console.log('Sprite or Button clicked');
-		this.addTreeRing();
+        console.log(this);
     }
+};
+
+// outside function just to pick a random keyval
+var randomProperty = function (obj) {
+    var keys = Object.keys(obj)
+    return obj[keys[ keys.length * Math.random() << 0]];
 };
