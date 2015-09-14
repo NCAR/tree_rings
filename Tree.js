@@ -23,9 +23,10 @@ Tree.prototype.subtractRadius = function() {
     }
 };
 // add a ring
-Tree.prototype.addRing = function() {
-    this.addRadius();
-    this.a_rings.push(this.i_radius);
+Tree.prototype.addRing = function(s_temperature, s_moisture) {
+    //this.addRadius();
+    this.a_climateHistory.addYear(s_temperature, s_moisture);
+    this.a_rings.push({s_temperature, s_moisture});
 };
 // add a ring
 Tree.prototype.removeRing = function() {
@@ -55,10 +56,10 @@ Tree.prototype.resetTree = function(){
 };
 // provide a value for each temperature condition
 Tree.prototype.ringTemperature = function(index) {
-    var cond = this.a_climateHistory.getAnnualConditions();
+    //var cond = this.a_climateHistory.getAnnualConditions();
 
-    var type = cond[index][0];
-    switch (type) {
+    //var type = cond[index][0];
+    switch (index) {
         case 'cool':
             return .5;
             break;
@@ -73,20 +74,20 @@ Tree.prototype.ringTemperature = function(index) {
 };
 // provide a value for each precipitation condition
 Tree.prototype.ringPrecipitation = function(index) {
-    var cond = this.a_climateHistory.getAnnualConditions();
-    var type = cond[index][1];
-    switch (type) {
+   // var cond = this.a_climateHistory.getAnnualConditions();
+   // var type = cond[index][1];
+    switch (index) {
         case 'dry':
-            return .5;
+            return 1;
             break;
         case 'normal':
-            return 2;
-            break;
-        case 'wet':
             return 4;
             break;
+        case 'wet':
+            return 8;
+            break;
     }
-    return 0;
+    //return 0;
 };
 // swap out climateHistory
 Tree.prototype.changeClimateHistory = function(newClimateHistory){
@@ -106,9 +107,21 @@ Tree.prototype.debug = function(){
 Tree.prototype.update = function() {
     this.clear();
     var arrayLength = this.getRings().length;
+    var a_treeRadius = new Array();
+    
+    // first create array of calculated progressive radii
+    var i_prevRadius = 0;
+    for(var i = 0; i < arrayLength; i++){
+        var i_recentRadius = i_prevRadius + this.ringTemperature(this.getRings()[i]['s_temperature']) + this.ringPrecipitation(this.getRings()[i]['s_moisture']);
+         a_treeRadius.push(i_recentRadius);
+         i_prevRadius = i_recentRadius;
+    }
+  
+    var arrayLength = a_treeRadius.length;
     for (var i = (arrayLength - 1); i >= 0; i--) {
 
-        ringRadius = this.getRings()[i] + this.ringTemperature(i) + this.ringPrecipitation(i);
+        ringRadius = a_treeRadius[i];
+       // console.log('Ring '+i+': Precip: '+this.ringPrecipitation(i)+' Temp: '+ this.ringTemperature(i)+' baseRadius: '+this.getRings()[i]+' for total ring radius: '+ringRadius);
 
         // Early, light growth
         this.beginFill(0xcccc99);
@@ -122,4 +135,5 @@ Tree.prototype.update = function() {
         //reset linestyle
         this.lineStyle(0);
     }
+    
 };
