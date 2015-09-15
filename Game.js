@@ -1,13 +1,11 @@
-a_climateHistory = new ClimateHistory();
-a_climateHistoryTarget = new ClimateHistory();
-a_activeClimateHistory = a_climateHistory;
-b_climateFlag = 'user';
-
+var b_climateFlag = 'user';
 var s_moisture = 'normal';
 var s_temperature = 'normal';
 
 TreeRings.Game = function(game) {
-	this.buildTarget();
+    a_targetTree = new Tree();
+    a_userTree = new Tree();
+    a_tree = new Tree();
 };
 
 TreeRings.Game.prototype = {
@@ -56,7 +54,14 @@ TreeRings.Game.prototype = {
         
 
         var baseRadius = 0;    
-        this.a_tree = new Tree(this, 650, 250,baseRadius,a_activeClimateHistory);
+        this.a_userTree = new Tree(this, 650, 250);
+        this.a_targetTree = new Tree(this, 650, 250);        
+        
+	    this.buildTarget();
+        
+        this.a_tree = this.a_userTree;
+        
+        
         this.add.existing(this.a_tree);
         
 		// Insert image of target tree ring pattern user should try to match
@@ -119,68 +124,74 @@ TreeRings.Game.prototype = {
 		
 	},
     buildTarget: function(){
-        a_climateHistoryTarget.resetClimateHistory();
         // initiate the Target
         //1
-        a_climateHistoryTarget.addYear('normal','normal');
+        this.a_targetTree.addRing('normal','normal');
         //2
-        a_climateHistoryTarget.addYear('warm','normal');
+        this.a_targetTree.addRing('warm','normal');
         //3
-        a_climateHistoryTarget.addYear('normal','normal');
+        this.a_targetTree.addRing('normal','normal');
         //4
-        a_climateHistoryTarget.addYear('warm','normal');
+        this.a_targetTree.addRing('warm','normal');
         //5
-        a_climateHistoryTarget.addYear('warm','dry');
+        this.a_targetTree.addRing('warm','dry');
         //6
-        a_climateHistoryTarget.addYear('warm','dry');
+        this.a_targetTree.addRing('warm','dry');
         //7
-        a_climateHistoryTarget.addYear('normal','dry');
+        this.a_targetTree.addRing('normal','dry');
         //8
-        a_climateHistoryTarget.addYear('normal','normal');
+        this.a_targetTree.addRing('normal','normal');
         //9
-        a_climateHistoryTarget.addYear('warm','normal');
+        this.a_targetTree.addRing('warm','normal');
         //10
-        a_climateHistoryTarget.addYear('normal','normal');
+        this.a_targetTree.addRing('normal','normal');
         //11
-        a_climateHistoryTarget.addYear('cool','wet');
+        this.a_targetTree.addRing('cool','wet');
         //12
-        a_climateHistoryTarget.addYear('normal','normal');
+        this.a_targetTree.addRing('normal','normal');
         //13
-        a_climateHistoryTarget.addYear('warn','normal');
+        this.a_targetTree.addRing('warm','normal');
         //14
-        a_climateHistoryTarget.addYear('warm','wet');
+        this.a_targetTree.addRing('warm','wet');
         // 15    
-        a_climateHistoryTarget.addYear('warm','wet');
+        this.a_targetTree.addRing('warm','wet');
     },
     /* listener functions */
     undoRingListener:  function(){
        if(this.a_tree.getRings().length > 0){
             this.a_tree.removeRing();
-            a_activeClimateHistory.removeYear();
         }
     },
     growRingListener: function(){
         this.a_tree.addRing(s_temperature, s_moisture);
-
-        // for now, just randomly picking temperature and precipitation
-        // ultimately this will be retrieved from user manipulated input
-        //a_activeClimateHistory.addYear(randomProperty(a_activeClimateHistory.getTemperatures()),randomProperty(a_activeClimateHistory.getPrecipitation()));
-        
     } ,
     swapClimateListener:  function(){
         
         if(b_climateFlag == 'target'){
             b_climateFlag = 'user';
-            a_activeClimateHistory = a_climateHistory;
             // we are now using the user submitted climate
-            // reset target
-            this.buildTarget();
+            this.a_targetTree.setExists(false);
+            this.a_userTree.setExists(true);
+            
+            // change action reference
+            this.a_tree = this.a_userTree;
+            this.add.existing(this.a_tree);
+            console.log('we are now using the user submitted climate');
         } else {
             b_climateFlag = 'target';
-            a_activeClimateHistory = a_climateHistoryTarget;
-            // we are now using the target climate
+            // when using the target tree, reset and rebuild it
+            this.a_targetTree.resetTree();
+            this.buildTarget();
+            
+           // we are now using the target climate
+            this.a_targetTree.setExists(true);
+            this.a_userTree.setExists(false);
+            
+            // change action reference
+            this.a_tree = this.a_targetTree;
+            this.add.existing(this.a_tree);
+            console.log('we are now using the target climate');
         }
-            this.a_tree.changeClimateHistory(a_activeClimateHistory);
     },
 	moistureBtnDryListener: function(){
 		s_moisture = 'dry';
