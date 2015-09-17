@@ -2,6 +2,11 @@ var b_climateFlag = 'user';
 var s_moisture = 'normal';
 var s_temperature = 'normal';
 
+var b_showInstructions = true;
+
+// instructions is global
+var instructionsImage;
+
 TreeRings.Game = function(game) {
     a_targetTree = new Tree();
     a_userTree = new Tree();
@@ -66,6 +71,9 @@ TreeRings.Game.prototype = {
         
 		// Insert image of target tree ring pattern user should try to match
 		this.add.image(650, 51, 'tree_ring_sample');
+        
+        // add instructions image
+        instructionsImage = this.add.image(0,0, 'instructions1');
 
 	},
 	createMoistureButtons: function() {
@@ -121,6 +129,17 @@ TreeRings.Game.prototype = {
 		
 	},
 	update: function () {
+        
+        
+        // if instructions are showing, and the mouse is clicked, hide the instructions
+        // and set the instructions flag to false
+        if(b_showInstructions == true){
+            if (this.input.activePointer.isDown)
+            {
+                b_showInstructions = false;
+                instructionsImage.kill();
+            }
+        }
 		
 	},
     buildTarget: function(){

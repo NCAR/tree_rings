@@ -46,6 +46,9 @@ TreeRings.Preloader.prototype = {
 		this.load.image('moisture_btn_wet', 'assets/images/moisture_btn_wet_120x120.png');
         // 193x71 is the size of each frame.
         this.load.spritesheet('button_spritesheet', 'assets/images/spritesheets/button_sprite_sheet.png', 193, 71);
+        
+        // preload helper images
+        this.load.image('instructions1', 'assets/images/instructions/instructions1.png');
 	},
 	preRender: function() {
 		
