@@ -7,6 +7,10 @@ var b_showInstructions = true;
 // instructions is global
 var instructionsImage;
 
+// which tree is target
+var s_targetTreeID = 'aspen';
+var s_targetTreeID_prior = 'aspen';
+
 TreeRings.Game = function(game) {
     a_targetTree = new Tree();
     a_userTree = new Tree();
@@ -20,6 +24,28 @@ TreeRings.Game.prototype = {
 	},
 	
 	buildWorld: function() {
+       $(document).ready(function(){
+            var data = {
+                'aspen': 'aspen',
+                'beech': 'beech',
+                'oak' : 'oak',
+                'redwood': 'redwood'
+            }
+            var tree_select = $('<select />').attr('id','tree_selector');
+            for(var val in data) {
+                $('<option />', {value: val, text: data[val]}).appendTo(tree_select);
+            }
+            tree_select.appendTo('body'); // or wherever it should be
+           
+           // add change listener
+           
+           $('#tree_selector').on('change', function(e){
+               s_targetTreeID_prior = s_targetTreeID;
+               s_targetTreeID = $( "#tree_selector option:selected" ).val();
+           });
+       });
+        
+        
 		this.add.image(0, 0, 'game_bg');
 		
 		// Buttons for selecting moisture level (dry, normal or wet)
@@ -140,40 +166,98 @@ TreeRings.Game.prototype = {
                 instructionsImage.kill();
             }
         }
-		
+        
+        if(s_targetTreeID != s_targetTreeID_prior){
+            this.buildTarget();
+            s_targetTreeID = s_targetTreeID_prior;
+        }
 	},
     buildTarget: function(){
+        this.a_targetTree.resetTree();
         // initiate the Target
-        //1
-        this.a_targetTree.addRing('normal','normal');
-        //2
-        this.a_targetTree.addRing('warm','normal');
-        //3
-        this.a_targetTree.addRing('normal','normal');
-        //4
-        this.a_targetTree.addRing('warm','normal');
-        //5
-        this.a_targetTree.addRing('warm','dry');
-        //6
-        this.a_targetTree.addRing('warm','dry');
-        //7
-        this.a_targetTree.addRing('normal','dry');
-        //8
-        this.a_targetTree.addRing('normal','normal');
-        //9
-        this.a_targetTree.addRing('warm','normal');
-        //10
-        this.a_targetTree.addRing('normal','normal');
-        //11
-        this.a_targetTree.addRing('cool','wet');
-        //12
-        this.a_targetTree.addRing('normal','normal');
-        //13
-        this.a_targetTree.addRing('warm','normal');
-        //14
-        this.a_targetTree.addRing('warm','wet');
-        // 15    
-        this.a_targetTree.addRing('warm','wet');
+        var a_targetRings = [];
+        switch(s_targetTreeID){         
+            case 'aspen':
+                 a_targetRings = [['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['normal','dry'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],
+                             ['cool','wet'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['warm','wet'],
+                             ['warm','wet']
+                            ];
+                break;
+            case 'beech':
+                 a_targetRings = [['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['warm','dry'],
+                             ['warm','dry'],                           
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry'],
+                             ['warm','dry']
+                            ];
+                break;
+            case 'oak':
+                 a_targetRings = [['normal','normal'],                            
+                             ['warm','wet'],
+                             ['warm','wet'],
+                             ['warm','wet'],
+                             ['warm','wet'],
+                             ['warm','wet'],
+                             ['normal','dry'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],
+                             ['cool','wet'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['warm','wet'],
+                             ['warm','wet']
+                            ];
+                break;
+            case 'redwood':
+                 a_targetRings = [['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],                           
+                             ['normal','normal'],
+                             ['normal','normal'],
+                             ['normal','normal'],
+                             ['normal','normal'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['normal','normal'],
+                             ['cool','wet'],
+                             ['normal','normal'],
+                             ['warm','normal'],
+                             ['warm','wet'],
+                             ['warm','wet']
+                            ];
+                break;
+        }
+        
+        var i_total_rings = a_targetRings.length;
+        for(var i=0; i< i_total_rings; i++){
+            this.a_targetTree.addRing(a_targetRings[i][0],a_targetRings[i][1]); 
+        }
+        
+        
+        
     },
     /* listener functions */
     undoRingListener:  function(){
