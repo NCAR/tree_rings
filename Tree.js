@@ -1,9 +1,16 @@
 // Tree object
 // game object, x coord, y coord
-Tree = function(game, x, y) {
+Tree = function(game, x, y, side) {
     Phaser.Graphics.call(this, game, x, y, 'tree');
-    this.a_rings = [];
+    this.a_climateYearly = [];
     this.exists = true;
+	
+	this.darkRingThickness = 2;
+	
+	this.s_side = side;
+	//console.log('Which side? ' + rightOrLeft);
+	//console.log('X = ' + x);
+	//console.log('Which side? ' + this.s_side);
 }
 
 Tree.prototype = Object.create(Phaser.Graphics.prototype);
@@ -17,22 +24,23 @@ Tree.prototype.setExists = function(b_bool){
         this.exists = false;
     }
 };
-// add a ring
+// Add a ring
 Tree.prototype.addRing = function(s_temperature, s_moisture) {
-    this.a_rings.push({s_temperature, s_moisture});
+    //this.a_rings.push({s_temperature, s_moisture});
+	
+    this.a_climateYearly.push({s_temperature, s_moisture});
 };
-// add a ring
+// Remove a ring
 Tree.prototype.removeRing = function() {
-   // this.subtractRadius();
-    this.a_rings.pop();
+    this.a_climateYearly.pop();
 };
 // return the rings array
 Tree.prototype.getRings = function() {
-    return this.a_rings;
+    return this.a_climateYearly;
 };
 // provide a preset for rings
-Tree.prototype.setRings = function(value){    
-    this.a_rings = value;
+Tree.prototype.setRings = function(value){  
+    this.a_climateYearly = value;
 }
 // reset the tree to init conditions
 Tree.prototype.resetTree = function(){
@@ -42,13 +50,13 @@ Tree.prototype.resetTree = function(){
 Tree.prototype.ringTemperature = function(index) {
     switch (index) {
         case 'cool':
-            return .5;
+            return 5;
             break;
         case 'normal':
-            return 5.5;
+            return 7;
             break;
         case 'warm':
-            return 7.5;
+            return 6;
             break;
     }
     return 0;
@@ -57,10 +65,10 @@ Tree.prototype.ringTemperature = function(index) {
 Tree.prototype.ringPrecipitation = function(index) {
     switch (index) {
         case 'dry':
-            return 1;
+            return 2;
             break;
         case 'normal':
-            return 5.5;
+            return 5;
             break;
         case 'wet':
             return 8;
@@ -87,21 +95,26 @@ Tree.prototype.update = function() {
     }
   
     // now reverse array and draw it
-    var arrayLength = a_treeRadius.length;
+	var arrayLength = a_treeRadius.length;
     for (var i = (arrayLength - 1); i >= 0; i--) {
         ringRadius = a_treeRadius[i];
        
+        // Dark, late growth
+        this.beginFill(0x996633);
+		if (this.s_side == 'left') {
+			this.arc(0, 0, ringRadius, Math.PI/2, 3*Math.PI/2);
+		} else {
+			this.arc(0, 0, ringRadius, -Math.PI/2, Math.PI/2);
+		}
+        this.endFill();
+       
         // Early, light growth
         this.beginFill(0xcccc99);
-        this.arc(0, 0, ringRadius, Math.PI / 2, 3 * Math.PI / 2);
+		if (this.s_side == 'left') {
+			this.arc(0, 0, ringRadius - this.darkRingThickness, Math.PI/2, 3*Math.PI/2);
+		} else {
+			this.arc(0, 0, ringRadius - this.darkRingThickness, -Math.PI/2, Math.PI/2);
+		}
         this.endFill();
-
-        // Dark, late growth
-        this.lineStyle(2, 0x996633);
-        this.arc(0, 0, ringRadius, Math.PI / 2, 3 * Math.PI / 2);
-        this.endFill();
-        //reset linestyle
-        this.lineStyle(0);
     }
-    
 };
