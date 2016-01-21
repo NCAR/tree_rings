@@ -60,7 +60,8 @@ TreeRings.StartMenu.prototype = {
 	},
 	
 	// For MultiLevel version
-    startLevel1: function (pointer) {
+    //startLevel1: function (pointer) {
+    startLevel1: function () {
         this._selectedLevel = 1;
         this.startGame();
 		console.log('Player chose level one');
@@ -73,7 +74,7 @@ TreeRings.StartMenu.prototype = {
     startLevel3: function (pointer) {
         this._selectedLevel = 3;
         this.startGame();
-		console.log('Player chose level three');
+		console.log('Player chose level three - 3');
     },
 	// End new code for MultiLevel version
 	
