@@ -43,6 +43,6 @@ Instructions.prototype.update = function() {
 	
 	//var style = "gucci";
 	var style = { font: "24px Arial", fill: "#990000", align: "center" };
-	console.log(style);
+	//console.log(style);
 	//var text = this.add.text(0, 0, "Instructions", style);
 };
