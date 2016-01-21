@@ -36,7 +36,7 @@ TreeRings.Preloader.prototype = {
 		this.titleText.anchor.setTo(0.5, 0.5);
 		
 		// For MultiLevel version
-		//this.load.json('dialog', 'assets/data/dialog.json');
+		this.load.json('dialog', 'assets/data/dialog.json');
 		// End new code for MultiLevel version
 		
 		this.load.image('titlescreen', 'assets/images/TitleBG.jpg');
