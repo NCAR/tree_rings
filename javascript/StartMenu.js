@@ -11,6 +11,9 @@ TreeRings.StartMenu = function(game) {
 TreeRings.StartMenu.prototype = {
 	
 	create: function() {
+		var startScreenBg = this.add.image(0, 0, 'start_screen_bg');
+		startScreenBg.alpha = 0.4;
+		
 		//startBG = this.add.image(0, 0, 'titlescreen');
 		//startBG.inputEnabled = true;
 		//startBG.events.onInputDown.addOnce(this.startGame, this);
@@ -22,23 +25,23 @@ TreeRings.StartMenu.prototype = {
 		
 		
         // For MultiLevel version
-		if(this._selectedLevel == 0){
+		/*if(this._selectedLevel == 0){
             startBG = this.add.image(0, 0, 'titlescreen');
 			startBG.alpha = 0.1;
             //var startBG = this.add.image(0, 0, 'game_start_bkg');
         } else {
             startBG = this.add.image(0, 0, 'game_play_again_bkg');
             //var startBG = this.add.image(0, 0, 'game_play_again_bkg');
-        }
+        }*/
 
         var style = {
-            font: "50px Arial",
+            font: "40px Arial",
             fill: "#000066",
             align: "center"
         };
-        var level1 = this.add.text(this.world.centerX, this.world.centerY + 80, "Level 1", style);
-        var level2 = this.add.text(this.world.centerX, this.world.centerY + 130, "Level 2", style);
-        var level3 = this.add.text(this.world.centerX, this.world.centerY + 180, "Level 3", style);
+        var level1 = this.add.text(this.world.centerX, this.world.centerY, "Level 1", style);
+        var level2 = this.add.text(this.world.centerX, this.world.centerY + 50, "Level 2", style);
+        var level3 = this.add.text(this.world.centerX, this.world.centerY + 100, "Level 3", style);
 
         level1.anchor.setTo(0.5, 0.5);
         level2.anchor.setTo(0.5, 0.5);
