@@ -11,47 +11,43 @@ TreeRings.StartMenu = function(game) {
 TreeRings.StartMenu.prototype = {
 	
 	create: function() {
-		var startScreenBg = this.add.image(0, 0, 'start_screen_bg');
-		startScreenBg.alpha = 0.4;
-		
-		//startBG = this.add.image(0, 0, 'titlescreen');
-		//startBG.inputEnabled = true;
-		//startBG.events.onInputDown.addOnce(this.startGame, this);
-      
-		//startPrompt = this.add.bitmapText(this.world.centerX-105, this.world.centerY+180, 'desyrel', 'Touch to Start!', 24);
-        ////var style = { font: "50px Arial", fill: "#000066", align: "center" };
-        ////startPrompt = this.add.text(this.world.centerX-155, this.world.centerY+180, "Touch to Start!", style);    
-    	////this.state.start('Game');
-		
-		
-        // For MultiLevel version
-		/*if(this._selectedLevel == 0){
-            startBG = this.add.image(0, 0, 'titlescreen');
-			startBG.alpha = 0.1;
-            //var startBG = this.add.image(0, 0, 'game_start_bkg');
-        } else {
-            startBG = this.add.image(0, 0, 'game_play_again_bkg');
-            //var startBG = this.add.image(0, 0, 'game_play_again_bkg');
-        }*/
+		// Background image
+		var startMenuBg = this.add.image(0, 0, 'start_menu_bg');
+		startMenuBg.alpha = 0.4;
 
-        var style = {
+        // Screen Title Text
+		var screenTitleStyle = {
             font: "40px Arial",
-            fill: "#000066",
+            fill: "#57350e"
+        };
+		
+		var screenTitleText = this.add.text(50, 50, "Decoding Past Climate with Tree Rings", screenTitleStyle);
+
+
+        // Game Level (or Sandbox) Selection Menu
+		var style = {
+            font: "40px Arial",
+            fill: "#822a0b",
             align: "center"
         };
         var level1 = this.add.text(this.world.centerX, this.world.centerY, "Level 1", style);
         var level2 = this.add.text(this.world.centerX, this.world.centerY + 50, "Level 2", style);
         var level3 = this.add.text(this.world.centerX, this.world.centerY + 100, "Level 3", style);
+		var sandBox = this.add.text(this.world.centerX, this.world.centerY + 150, "Sandbox", style);
+        var level4 = this.add.text(this.world.centerX, this.world.centerY + 200, "Level 4", style);
 
         level1.anchor.setTo(0.5, 0.5);
         level2.anchor.setTo(0.5, 0.5);
         level3.anchor.setTo(0.5, 0.5);
+        sandBox.anchor.setTo(0.5, 0.5);
+        level4.anchor.setTo(0.5, 0.5);
 
-        level1.inputEnabled = level2.inputEnabled = level3.inputEnabled = true;
+        level1.inputEnabled = level2.inputEnabled = level3.inputEnabled = sandBox.inputEnabled = level4.inputEnabled = true;
         level1.events.onInputDown.addOnce(this.startLevel1, this);
         level2.events.onInputDown.addOnce(this.startLevel2, this);
         level3.events.onInputDown.addOnce(this.startLevel3, this);
-		// End new code for MultiLevel version
+        sandBox.events.onInputDown.addOnce(this.startSandBox, this);
+        level4.events.onInputDown.addOnce(this.startLevel4, this);
 	},
 
 	startGame: function (pointer) {
@@ -79,6 +75,15 @@ TreeRings.StartMenu.prototype = {
         this._selectedLevel = 3;
         this.startGame();
 		console.log('Player chose level three');
+    },
+    startSandBox: function (pointer) {
+        console.log('Player chose sandbox mode');
+		this.state.start('SandBox');
+    },
+    startLevel4: function (pointer) {
+        //this._selectedLevel = 3;
+        //this.startGame();
+		console.log('Player chose level four');
     },
 	// End new code for MultiLevel version
 	

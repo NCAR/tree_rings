@@ -40,7 +40,8 @@ TreeRings.Preloader.prototype = {
 		// End new code for MultiLevel version
 		
 		// For improved multilevel version
-		this.load.image('start_screen_bg', 'assets/images/start_screen_bg_900x500.jpg');
+		this.load.image('start_menu_bg', 'assets/images/start_menu_bg_900x500.jpg');
+		this.load.image('sandbox_bg', 'assets/images/sandbox_bg_900x500.jpg');
 		// End new code for improved multilevel version
 		
 		this.load.image('titlescreen', 'assets/images/TitleBG.jpg');
