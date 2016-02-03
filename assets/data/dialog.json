@@ -1,6 +1,7 @@
 {
-    "credits": "credits blah blah",
-    "level1": "level 1 blah blah",
-    "level2": "level 2 blah blah",
-    "level3": "level 3 blah blah"
+    "credits": "This simulation and game was developed by Randy Russell and Sharon Clark at the UCAR Center for Science Education.",
+    "level1": "Instructions for Level 1.",
+    "level2": "Instructions for Level 2.",
+    "level3": "Instructions for Level 3.",
+    "level4": "Instructions for Level 4."
 }

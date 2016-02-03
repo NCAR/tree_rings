@@ -84,6 +84,7 @@ TreeRings.StartMenu.prototype = {
         //this._selectedLevel = 3;
         //this.startGame();
 		console.log('Player chose level four');
+		this.state.start('GameLevel_4');
     },
 	// End new code for MultiLevel version
 	

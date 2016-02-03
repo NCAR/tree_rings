@@ -10,7 +10,10 @@
     <script src="Boot.js"></script>
     <script src="javascript/Preloader.js"></script>
     <script src="javascript/StartMenu.js"></script>
+    <script src="javascript/ReplayMenu.js"></script>
     <script src="javascript/SandBox.js"></script>
+    <script src="javascript/GameLevel.js"></script>
+    <script src="javascript/GameLevel_4.js"></script>
     <script src="Tree.js"></script>
     <script src="Instructions.js"></script>
     <script src="Game.js"></script>
@@ -30,12 +33,16 @@
 			// new Game(width, height, renderer, parent, state, transparent, antialias, physicsConfig)
 			// http://phaser.io/docs/2.4.2/Phaser.Game.html
 			var game = new Phaser.Game(900, 500, Phaser.AUTO, 'gameContainer');
+			game.score = 0;
+			
 			// The State Manager is responsible for loading, setting up and switching game states.
 			// http://phaser.io/docs/2.4.2/Phaser.StateManager.html#add
 			game.state.add('Boot', TreeRings.Boot);
 			game.state.add('Preloader', TreeRings.Preloader);
 			game.state.add('StartMenu', TreeRings.StartMenu);
+			game.state.add('ReplayMenu', TreeRings.ReplayMenu);
 			game.state.add('SandBox', TreeRings.SandBox);
+			game.state.add('GameLevel_4', TreeRings.GameLevel_4);
 			game.state.add('Game', TreeRings.Game);
 			game.state.start('Boot');
 		}
