@@ -44,10 +44,10 @@ GameLevel.prototype.changeScore = function(sWhichChange, points) {
 
 GameLevel.prototype._initScoring = function() {
     //button to add points
-	var scoreBtn = this.add.button(this.world.centerX, this.world.centerY, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
-	scoreBtn.anchor.setTo(0.5, 0.5);
+	var scoreBtn = this.add.button(this.game.width - 200, this.game.height - 160, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
+	//var scoreBtn = this.add.button(this.world.centerX, this.world.centerY, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
 	scoreBtn.name = 'scoreButton';
-	scoreBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
+	//scoreBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
 	
 	// score text
     this._scoreText = this.add.text(this.world.centerX, this.world.centerY+200, "Score: " + this.game.score, { fontSize: '32px', fill: '#000' });
@@ -65,8 +65,9 @@ GameLevel.prototype._scorePoints = function(pointer) {
 
 GameLevel.prototype._initInstructions = function() {
     // instructions button
-	this._instructions = this.add.text(100, this.world.height-50, "Instructions", { fontSize: '32px', fill: '#000' });
-	this._instructions.anchor.setTo(0.5, 0.5);
+	this._instructions = this.add.text(50, this.game.height-100, "Instructions", { fontSize: '32px', fill: '#000' });
+	//this._instructions = this.add.text(100, this.world.height-50, "Instructions", { fontSize: '32px', fill: '#000' });
+	//this._instructions.anchor.setTo(0.5, 0.5);
 	this._instructions.inputEnabled = true;
 	this._instructions.events.onInputDown.add(this._showInstructions, this);
 };
@@ -81,10 +82,10 @@ GameLevel.prototype._showInstructions = function(pointer) {
 
 GameLevel.prototype._initQuitLevel = function() {
     // Button to Quit Level
-	var quitBtn = this.add.button(this.world.centerX, this.world.centerY+100, 'button_spritesheet_finish_level', this._quitLevel, this, 2, 1, 0);
-	quitBtn.anchor.setTo(0.5, 0.5);
+	var quitBtn = this.add.button(this.game.width - 200, this.game.height - 80, 'button_spritesheet_finish_level', this._quitLevel, this, 2, 1, 0);
+	//var quitBtn = this.add.button(this.world.centerX, this.world.centerY+100, 'button_spritesheet_finish_level', this._quitLevel, this, 2, 1, 0);
 	quitBtn.name = 'quitButton';
-	quitBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
+	//quitBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
 };
 
 GameLevel.prototype._quitLevel = function(pointer) {
@@ -96,8 +97,9 @@ GameLevel.prototype._quitLevel = function(pointer) {
 /////////////
 
 GameLevel.prototype._initCredits = function() {
-    this._credits = this.add.text(this.world.width-100, this.world.height-50, "Credits", { fontSize: '32px', fill: '#000' });
-	this._credits.anchor.setTo(0.5, 0.5);
+    this._credits = this.add.text(50, this.game.height-50, "Credits", { fontSize: '32px', fill: '#000' });
+	//this._credits = this.add.text(this.world.width-100, this.world.height-50, "Credits", { fontSize: '32px', fill: '#000' });
+	//this._credits.anchor.setTo(0.5, 0.5);
 	this._credits.inputEnabled = true;
 	this._credits.events.onInputDown.add(this._showCredits, this);
 };
