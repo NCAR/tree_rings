@@ -1,17 +1,13 @@
 // Tree object
-// game object, x coord, y coord
-Tree = function(game, x, y, side) {
+// game object, x coord, y coord, right or left semicircle, climate history data for rings
+Tree = function(game, x, y, side, aClimateData) {
     Phaser.Graphics.call(this, game, x, y, 'tree');
-    this.a_climateYearly = [];
+	
+    this.a_climateYearly = aClimateData;
     this.exists = true;
-	
 	this.darkRingThickness = 2;
-	
 	this.s_side = side;
-	//console.log('Which side? ' + rightOrLeft);
-	//console.log('X = ' + x);
-	//console.log('Which side? ' + this.s_side);
-}
+};
 
 Tree.prototype = Object.create(Phaser.Graphics.prototype);
 Tree.prototype.constructor = Tree;
@@ -26,9 +22,7 @@ Tree.prototype.setExists = function(b_bool){
 };
 // Add a ring
 Tree.prototype.addRing = function(s_temperature, s_moisture) {
-    //this.a_rings.push({s_temperature, s_moisture});
-	
-    this.a_climateYearly.push({s_temperature, s_moisture});
+    this.a_climateYearly.push([s_temperature, s_moisture]);
 };
 // Remove a ring
 Tree.prototype.removeRing = function() {
@@ -74,12 +68,8 @@ Tree.prototype.ringPrecipitation = function(index) {
             return 8;
             break;
     }
-    //return 0;
 };
 
-Tree.prototype.debug = function(){
-    console.log(this);   
-};
 // draw the rings
 Tree.prototype.update = function() {
     this.clear();
@@ -89,9 +79,10 @@ Tree.prototype.update = function() {
     // first create array of calculated progressive radii
     var i_prevRadius = 0;
     for(var i = 0; i < arrayLength; i++){
-        var i_recentRadius = i_prevRadius + this.ringTemperature(this.getRings()[i]['s_temperature']) + this.ringPrecipitation(this.getRings()[i]['s_moisture']);
-         a_treeRadius.push(i_recentRadius);
-         i_prevRadius = i_recentRadius;
+		var i_recentRadius = i_prevRadius + this.ringTemperature(this.getRings()[i][0]) + this.ringPrecipitation(this.getRings()[i][1]);
+		 //var i_recentRadius = i_prevRadius + this.ringTemperature(this.getRings()[i]['s_temperature']) + this.ringPrecipitation(this.getRings()[i]['s_moisture']);
+		 a_treeRadius.push(i_recentRadius);
+		 i_prevRadius = i_recentRadius;
     }
   
     // now reverse array and draw it
@@ -117,4 +108,8 @@ Tree.prototype.update = function() {
 		}
         this.endFill();
     }
+};
+
+Tree.prototype.debug = function(){
+    console.log(this);   
 };

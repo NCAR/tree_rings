@@ -8,8 +8,6 @@ TreeRings.Preloader.prototype = {
 
 	create: function() {
 		this.preloadBar.cropEnabled = false;
-		
-    	//this.state.start('StartMenu');
 	},
 	init: function() {
 		
@@ -37,6 +35,7 @@ TreeRings.Preloader.prototype = {
 		
 		// For MultiLevel version
 		this.load.json('dialog', 'assets/data/dialog.json');
+		this.load.json('treesData', 'assets/data/trees.json');
 		// End new code for MultiLevel version
 		
 		// For improved multilevel version
@@ -82,8 +81,6 @@ TreeRings.Preloader.prototype = {
         this.load.spritesheet('button_spritesheet_finish_level', 'assets/images/spritesheets/button_sprite_sheet_finish_level.png', 193, 71);
         this.load.spritesheet('button_spritesheet_add_points', 'assets/images/spritesheets/button_sprite_sheet_add_points.png', 193, 71);
         this.load.spritesheet('button_spritesheet_close_dialog', 'assets/images/spritesheets/button_sprite_sheet_close_dialog.png', 193, 71);
-		
-		console.log('Preloading complete');
 		// End new code for MultiLevel version
 	},
 	preRender: function() {

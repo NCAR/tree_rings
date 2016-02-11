@@ -1,7 +1,6 @@
 TreeRings.GameLevel_4 = function(game) {
 	this.game = game; // keep reference to main game object
 	GameLevel.call(this, 4, 'game_bg');
-	//GameLevel.call(this, 4, 'game_level_4_bg');
 };
 
 TreeRings.GameLevel_4.prototype = Object.create(GameLevel.prototype);
@@ -10,6 +9,10 @@ TreeRings.GameLevel_4.prototype.constructor = TreeRings.GameLevel_4;
 TreeRings.GameLevel_4.prototype.create = function() {
 	GameLevel.prototype.create.apply(this);
 	this._buildLevel();
+};
+
+TreeRings.GameLevel_4.prototype.preload = function() {
+	this._treesData = this.cache.getJSON('treesData');
 };
 
 TreeRings.GameLevel_4.prototype._buildLevel = function() { 
@@ -32,36 +35,20 @@ TreeRings.GameLevel_4.prototype._buildLevel = function() {
 
 TreeRings.GameLevel_4.prototype._createTrees = function() {
 	// Create trees - target and player's
+	
+	// Target tree data from preloaded JSON file
+	var targetTreeData = this._treesData["allClimates"];
         
 	// Insert target tree ring pattern player should try to match
-	this._targetTree = new Tree(this, 650, 250, 'right');   
-	this._buildTargetTree();
+	this._targetTree = new Tree(this, 650, 250, 'right', targetTreeData);
 	this.add.existing(this._targetTree);
 	
 	 
 	// Create the player's tree that they will add rings to
-	var baseRadius = 0;    
-	this._playerTree = new Tree(this, 650, 250, 'left');
+	var baseRadius = 0;
+	var playerTreeData = new Array();
+	this._playerTree = new Tree(this, 650, 250, 'left', playerTreeData);
 	this.add.existing(this._playerTree);
-};
-
-TreeRings.GameLevel_4.prototype._buildTargetTree = function() {
-	// initiate the Target Tree
-	this._targetTree.addRing('normal','wet'); // Year 1
-	this._targetTree.addRing('normal','wet'); // Year 2
-	this._targetTree.addRing('cool','dry'); // Year 3
-	this._targetTree.addRing('cool','dry'); // Year 4
-	this._targetTree.addRing('cool','dry'); // Year 5
-	this._targetTree.addRing('cool','dry'); // Year 6
-	this._targetTree.addRing('cool','dry'); // Year 7
-	this._targetTree.addRing('cool','dry'); // Year 8
-	this._targetTree.addRing('cool','dry'); // Year 9
-	this._targetTree.addRing('cool','dry'); // Year 10
-	this._targetTree.addRing('cool','dry'); // Year 11
-	this._targetTree.addRing('cool','dry'); // Year 12
-	this._targetTree.addRing('cool','dry'); // Year 13
-	this._targetTree.addRing('cool','dry'); // Year 14
-	this._targetTree.addRing('normal','wet'); // Year 15
 };
 
 ////////////////////
@@ -82,7 +69,6 @@ TreeRings.GameLevel_4.prototype._createGrowthButtons = function() {
 	
 	
     // Text for undo one year's growth
-	//var style = { font: "24px Arial", fill: "#006600", align: "center" };
 	var undoText = this.add.text(300, 10, "Remove One Year", style);
 	
 	// Insert undo One Year button
@@ -96,13 +82,9 @@ TreeRings.GameLevel_4.prototype._growRingListener = function() {
 };
 
 TreeRings.GameLevel_4.prototype._undoRingListener = function() {
-    //this.a_userTree.addRing(s_temperature, s_moisture);
-	
-	if(this._playerTree.getRings().length > 0){
+    if(this._playerTree.getRings().length > 0){
     	this._playerTree.removeRing();
     };
-	
-	console.log('Remove one growth ring ' + this._playerTree.getRings().length);
 };
 
 //////////////////////

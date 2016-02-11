@@ -1,0 +1,23 @@
+{
+	"oak": [
+		["cool", "dry"], 
+		["cool", "normal"], 
+		["cool", "wet"]
+	],
+	"allClimates": [
+		["cool", "dry"], 
+		["cool", "normal"], 
+		["cool", "wet"], 
+		["normal", "dry"], 
+		["normal", "normal"], 
+		["normal", "wet"], 
+		["warm", "dry"], 
+		["warm", "normal"], 
+		["warm", "wet"]
+	],
+	"maple": [
+		["warm", "dry"], 
+		["warm", "normal"], 
+		["warm", "wet"]
+	]
+}

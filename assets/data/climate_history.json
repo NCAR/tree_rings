@@ -1,0 +1,24 @@
+{
+	"oak": [
+		{"cool", "dry"},
+		{"cool", "normal"},
+		{"cool", "wet"},
+		{"warm", "dry"},
+		{"warm", "normal"},
+		{"warm", "wet"},
+		{"normal", "dry"},
+		{"normal", "normal"},
+		{"normal", "wet"}
+	],
+	"maple": [
+		{"cool", "dry"},
+		{"cool", "dry"},
+		{"cool", "dry"},
+		{"warm", "wet"},
+		{"warm", "wet"},
+		{"warm", "wet"},
+		{"normal", "dry"},
+		{"normal", "normal"},
+		{"normal", "wet"}
+	]
+}

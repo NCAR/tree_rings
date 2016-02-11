@@ -64,27 +64,20 @@ TreeRings.StartMenu.prototype = {
     startLevel1: function () {
         this._selectedLevel = 1;
         this.startGame();
-		console.log('Player chose level one');
     },
     startLevel2: function (pointer) {
         this._selectedLevel = 2;
         this.startGame();
-		console.log('Player chose level two');
     },
     startLevel3: function (pointer) {
         this._selectedLevel = 3;
         this.startGame();
-		console.log('Player chose level three');
     },
     startSandBox: function (pointer) {
-        console.log('Player chose sandbox mode');
-		this.state.start('SandBox');
+        this.state.start('SandBox');
     },
     startLevel4: function (pointer) {
-        //this._selectedLevel = 3;
-        //this.startGame();
-		console.log('Player chose level four');
-		this.state.start('GameLevel_4');
+        this.state.start('GameLevel_4');
     },
 	// End new code for MultiLevel version
 	
