@@ -11,9 +11,10 @@ TreeRings.GameLevel_4.prototype.create = function() {
 	this._buildLevel();
 };
 
-TreeRings.GameLevel_4.prototype.preload = function() {
+/*TreeRings.GameLevel_4.prototype.preload = function() {
 	this._treesData = this.cache.getJSON('treesData');
-};
+	console.log(this._treesData);
+};*/
 
 TreeRings.GameLevel_4.prototype._buildLevel = function() { 
 	// Buttons for tree growth (Grow One Year or Remove One Year)

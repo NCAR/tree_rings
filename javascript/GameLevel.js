@@ -18,8 +18,9 @@ GameLevel.prototype.create = function() {
 };
 
 GameLevel.prototype.preload = function() {
-	// load the dialog json data file
+	// load the JSON data files for Instructions & Credits dialog boxes and tree ring data
 	this._dialog = this.cache.getJSON('dialog');
+	this._treesData = this.cache.getJSON('treesData');
 };
 
 ///////////
