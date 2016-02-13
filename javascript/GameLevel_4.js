@@ -18,7 +18,8 @@ TreeRings.GameLevel_4.prototype.create = function() {
 
 TreeRings.GameLevel_4.prototype._buildLevel = function() { 
 	// Buttons for tree growth (Grow One Year or Remove One Year)
-	this._createGrowthButtons();
+	var treeGrowthBtns = new TreeGrowthBtnGroup(this);
+	//this._createGrowthButtons();
 	
 	// Buttons for selecting moisture level (dry, normal or wet)
 	this._createMoistureButtons();
@@ -28,6 +29,10 @@ TreeRings.GameLevel_4.prototype._buildLevel = function() {
 		
 	// Create trees - target and player's
 	this._createTrees();
+	
+	
+	
+	//console.log("GameLevel_4.this = " + this.key);
 };
 
 ///////////
@@ -56,9 +61,12 @@ TreeRings.GameLevel_4.prototype._createTrees = function() {
 // Growth Buttons //
 ////////////////////
 
-TreeRings.GameLevel_4.prototype._createGrowthButtons = function() {
+/*TreeRings.GameLevel_4.prototype._createGrowthButtons = function() {
 	// Create buttons for growing tree (add or remove rings)
-        
+	var growthBtns = new TreeGrowthBtnGroup(this);
+	//growthBtns.x = 450;
+    
+	
 	// Text for growing one year
 	var style = { font: "24px Arial", fill: "#006600", align: "center" };
 	var growText = this.add.text(50, 10, "Grow One Year", style);
@@ -68,7 +76,6 @@ TreeRings.GameLevel_4.prototype._createGrowthButtons = function() {
 	growBtn.name = 'growButton';
 	growBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
 	
-	
     // Text for undo one year's growth
 	var undoText = this.add.text(300, 10, "Remove One Year", style);
 	
@@ -76,9 +83,17 @@ TreeRings.GameLevel_4.prototype._createGrowthButtons = function() {
 	var undoBtn = this.add.button(400, 80, 'button_spritesheet', this._undoRingListener, this, 2, 1, 0);
 	undoBtn.name = 'undoButton';
 	undoBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
-};
+	
+	// Place buttons and text into a group (display object)
+	var treeGrowthBtns = this.add.group();
+	treeGrowthBtns.add(growText);
+	treeGrowthBtns.add(growBtn);
+	treeGrowthBtns.add(undoText);
+	treeGrowthBtns.add(undoBtn);
+	
+};*/
 
-TreeRings.GameLevel_4.prototype._growRingListener = function() {
+/*TreeRings.GameLevel_4.prototype._growRingListener = function() {
     this._playerTree.addRing(this.s_temperature, this.s_moisture);
 };
 
@@ -86,7 +101,7 @@ TreeRings.GameLevel_4.prototype._undoRingListener = function() {
     if(this._playerTree.getRings().length > 0){
     	this._playerTree.removeRing();
     };
-};
+};*/
 
 //////////////////////
 // Moisture Buttons //
