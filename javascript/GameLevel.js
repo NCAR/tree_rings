@@ -6,6 +6,9 @@ GameLevel = function(currentGameLevel, sBgImage) {
 	
 	this._instructions;
 	this._credits;
+	
+	this.sMoisture;
+	this.sTemperature = 'normal';
 };
 
 GameLevel.prototype.create = function() {
@@ -21,6 +24,38 @@ GameLevel.prototype.preload = function() {
 	// load the JSON data files for Instructions & Credits dialog boxes and tree ring data
 	this._dialog = this.cache.getJSON('dialog');
 	this._treesData = this.cache.getJSON('treesData');
+};
+
+/////////////////////
+// Current Climate //
+/////////////////////
+
+GameLevel.prototype.setClimate = function(climate, state){
+	if (climate == 'moisture'){
+		this.sMoisture = state;
+	} else {
+		this.sTemperature = state;
+	}
+	
+	//console.log(climate + ' set to ' + state);
+};
+
+////////////////
+// Tree Rings //
+////////////////
+
+//GameLevel.prototype.addRing = function(climate, state){
+GameLevel.prototype.addRing = function(){
+	//console.log("player tree = " + this._playerTree);
+	//console.log("moisture = " + this.sMoisture);
+	//console.log("temperature = " + this.sTemperature);
+	this._playerTree.addRing(this.sTemperature, this.sMoisture);
+};
+
+GameLevel.prototype.removeRing = function(){
+	if(this._playerTree.getRings().length > 0){
+    	this._playerTree.removeRing();
+    };
 };
 
 ///////////

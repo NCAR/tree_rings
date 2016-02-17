@@ -40,11 +40,13 @@ TreeGrowthBtnGroup.prototype._growRingListener = function() {
     //parent._playerTree.addRing(this.s_temperature, this.s_moisture);
 	//console.log(this);
 	//console.log(this.game.key);
-	this.game._playerTree.addRing(this.game.s_temperature, this.game.s_moisture);
+	//this.game._playerTree.addRing(this.game.s_temperature, this.game.s_moisture);
+	this.game.addRing();
 };
 
 TreeGrowthBtnGroup.prototype._undoRingListener = function() {
-    if(this.game._playerTree.getRings().length > 0){
+    /*if(this.game._playerTree.getRings().length > 0){
     	this.game._playerTree.removeRing();
-    };
+    };*/
+	this.game.removeRing();
 };

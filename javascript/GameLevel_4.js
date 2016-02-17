@@ -1,6 +1,10 @@
 TreeRings.GameLevel_4 = function(game) {
 	this.game = game; // keep reference to main game object
 	GameLevel.call(this, 4, 'game_bg');
+	
+	//this.sMoisture;
+	//this.sMoisture = 'normal';
+	//this.sTemperature = 'normal';
 };
 
 TreeRings.GameLevel_4.prototype = Object.create(GameLevel.prototype);
@@ -22,7 +26,9 @@ TreeRings.GameLevel_4.prototype._buildLevel = function() {
 	//this._createGrowthButtons();
 	
 	// Buttons for selecting moisture level (dry, normal or wet)
-	this._createMoistureButtons();
+	var moistureBtns = new MoistureBtnGroup(this);
+	moistureBtns.x = 60; moistureBtns.y = 130;
+	//this._createMoistureButtons();
 		
 	// Buttons for selecting temperature (cool, normal or warm)
 	this._createTemperatureButtons();
@@ -107,7 +113,17 @@ TreeRings.GameLevel_4.prototype._undoRingListener = function() {
 // Moisture Buttons //
 //////////////////////
 
-TreeRings.GameLevel_4.prototype._createMoistureButtons = function() {
+/*TreeRings.GameLevel_4.prototype.setClimate = function(climate, state){
+	if (climate == 'moisture'){
+		this.sMoisture = state;
+	} else {
+		this.sTemperature = state;
+	}
+	
+	console.log(climate + ' set to ' + state);
+};*/
+
+/*TreeRings.GameLevel_4.prototype._createMoistureButtons = function() {
 	// Create buttons for selecting moisture level of dry, normal, or wet
 	
 	// Container for buttons
@@ -137,10 +153,10 @@ TreeRings.GameLevel_4.prototype._createMoistureButtons = function() {
 	this.s_moisture = 'normal';
 	moistureBtnGroup.dryBtn.highlight.visible = false;
 	moistureBtnGroup.wetBtn.highlight.visible = false;
-};
+};*/
 
 
-TreeRings.GameLevel_4.prototype._moistureBtnDryListener = function(){
+/*TreeRings.GameLevel_4.prototype._moistureBtnDryListener = function(){
 	this.s_moisture = 'dry';
 	moistureBtnGroup.dryBtn.highlight.visible = true;
 	moistureBtnGroup.normalBtn.highlight.visible = false;
@@ -158,7 +174,7 @@ TreeRings.GameLevel_4.prototype._moistureBtnWetListener = function(){
 	moistureBtnGroup.wetBtn.highlight.visible = true;
 	moistureBtnGroup.dryBtn.highlight.visible = false;
 	moistureBtnGroup.normalBtn.highlight.visible = false;
-};
+};*/
 
 /////////////////////////
 // Temperature Buttons //
