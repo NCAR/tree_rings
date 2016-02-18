@@ -36,19 +36,13 @@ GameLevel.prototype.setClimate = function(climate, state){
 	} else {
 		this.sTemperature = state;
 	}
-	
-	//console.log(climate + ' set to ' + state);
 };
 
 ////////////////
 // Tree Rings //
 ////////////////
 
-//GameLevel.prototype.addRing = function(climate, state){
 GameLevel.prototype.addRing = function(){
-	//console.log("player tree = " + this._playerTree);
-	//console.log("moisture = " + this.sMoisture);
-	//console.log("temperature = " + this.sTemperature);
 	this._playerTree.addRing(this.sTemperature, this.sMoisture);
 };
 

@@ -43,7 +43,6 @@ MoistureBtnGroup.prototype._init = function() {
 	
 	// "Normal" moisture selected at startup; hide highlights of dry and wet buttons
 	this.game.setClimate('moisture', 'normal');
-	//this.s_moisture = 'normal';
 	this._dryBtn.highlight.visible = false;
 	this._wetBtn.highlight.visible = false;
 };
