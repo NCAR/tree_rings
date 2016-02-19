@@ -21,10 +21,18 @@ TreeRings.GameLevel_4.prototype._buildLevel = function() {
 	moistureBtns.x = 60; moistureBtns.y = treeGrowthBtns.y + 120;
 		
 	// Buttons for selecting temperature (cool, normal or warm)
-	this._createTemperatureButtons();
+	var temperatureBtns = new TemperatureBtnGroup(this);
+	temperatureBtns.x = moistureBtns.x; temperatureBtns.y = moistureBtns.y + 125;
+	//this._createTemperatureButtons();
 		
 	// Create trees - target and player's
 	this._createTrees();
+		
+	// Create bar graph of player's climate choices history
+	this._graph = new Graph(this);
+	this._graph.x = 500;
+	//this.add.existing(this._graph);
+	//var graph = new Graph(this);
 };
 
 ///////////
@@ -53,7 +61,7 @@ TreeRings.GameLevel_4.prototype._createTrees = function() {
 /////////////////////////
 
 
-TreeRings.GameLevel_4.prototype._createTemperatureButtons = function() {
+/*TreeRings.GameLevel_4.prototype._createTemperatureButtons = function() {
 	// Create buttons for selecting temperature level of cool, normal, or warm
 	
 	// Container for buttons
@@ -105,4 +113,4 @@ TreeRings.GameLevel_4.prototype._temperatureBtnWarmListener = function(){
 	temperatureBtnGroup.warmBtn.highlight.visible = true;
 	temperatureBtnGroup.coolBtn.highlight.visible = false;
 	temperatureBtnGroup.normalBtn.highlight.visible = false;
-};
+};*/
