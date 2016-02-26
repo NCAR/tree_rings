@@ -1,3 +1,9 @@
+// To do:
+//   Add parameter to specify graphing of moisture or temperature or both
+//   Add parameter to specify # of years along the x-axis
+//   Maybe add parameter to specify graph paper size
+
+
 // Graph class/object
 // Parameters: game object, x coord, y coord
 Graph = function(game) {
