@@ -43,7 +43,7 @@ TreeRings.GameLevel_4.prototype._createTrees = function() {
 	// Create trees - target and player's
 	
 	// Target tree data from preloaded JSON file
-	var targetTreeData = this._treesData["allClimates"];
+	var targetTreeData = this._treesData["drought"];
         
 	// Insert target tree ring pattern player should try to match
 	this._targetTree = new Tree(this, 650, 250, 'right', targetTreeData);

@@ -41,7 +41,7 @@ TemperatureBtnGroup.prototype._init = function() {
 	this._normalBtn.highlight = this._normalBtn.addChild(this.game.make.sprite(0, 0, 'moisture_btn_selected_highlight'));
 	this._warmBtn.highlight = this._warmBtn.addChild(this.game.make.sprite(0, 0, 'moisture_btn_selected_highlight'));
 	
-	// "Normal" moisture selected at startup; hide highlights of dry and wet buttons
+	// "Normal" temperature selected at startup; hide highlights of warm and cool buttons
 	this.game.setClimate('temperature', 'normal');
 	this._coolBtn.highlight.visible = false;
 	this._warmBtn.highlight.visible = false;

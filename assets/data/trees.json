@@ -1,8 +1,27 @@
 {
-	"oak": [
-		["cool", "dry"], 
-		["cool", "normal"], 
-		["cool", "wet"]
+	"moistureOnly": [
+		["normal", "normal"],
+		["normal", "dry"],
+		["normal", "normal"],
+		["normal", "wet"],
+		["normal", "normal"],
+		["normal", "wet"],
+		["normal", "dry"],
+		["normal", "normal"],
+		["normal", "dry"],
+		["normal", "wet"]
+	],
+	"temperatureOnly": [
+		["normal", "normal"],
+		["cool", "normal"],
+		["normal", "normal"],
+		["warm", "normal"],
+		["normal", "normal"],
+		["cool", "normal"],
+		["warm", "normal"],
+		["normal", "normal"],
+		["warm", "normal"],
+		["cool", "normal"]
 	],
 	"allClimates": [
 		["cool", "dry"], 
@@ -14,6 +33,26 @@
 		["warm", "dry"], 
 		["warm", "normal"], 
 		["warm", "wet"]
+	],
+	"drought": [
+		["normal", "normal"], 
+		["warm", "normal"], 
+		["normal", "wet"], 
+		["normal", "dry"], 
+		["warm", "dry"], 
+		["warm", "dry"], 
+		["normal", "dry"], 
+		["cool", "dry"], 
+		["normal", "dry"], 
+		["warm", "dry"], 
+		["warm", "normal"], 
+		["normal", "normal"], 
+		["warm", "wet"]
+	],
+	"oak": [
+		["cool", "dry"], 
+		["cool", "normal"], 
+		["cool", "wet"]
 	],
 	"maple": [
 		["warm", "dry"], 

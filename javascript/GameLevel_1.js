@@ -21,15 +21,17 @@ TreeRings.GameLevel_1.prototype._buildLevel = function() {
 	moistureBtns.x = 60; moistureBtns.y = treeGrowthBtns.y + 120;
 		
 	// Buttons for selecting temperature (cool, normal or warm)
-	var temperatureBtns = new TemperatureBtnGroup(this);
-	temperatureBtns.x = moistureBtns.x; temperatureBtns.y = moistureBtns.y + 125;
+	//var temperatureBtns = new TemperatureBtnGroup(this);
+	//temperatureBtns.x = moistureBtns.x; temperatureBtns.y = moistureBtns.y + 125;
+	this.setClimate('temperature', 'normal');
+	//this.game.setClimate('temperature', 'normal');
 		
 	// Create trees - target and player's
 	this._createTrees();
 		
 	// Create bar graph of player's climate choices history
 	this._graph = new Graph(this);
-	this._graph.x = 490; this._graph.y = 10;
+	this._graph.x = 500; this._graph.y = 0;
 };
 
 ///////////
@@ -40,7 +42,7 @@ TreeRings.GameLevel_1.prototype._createTrees = function() {
 	// Create trees - target and player's
 	
 	// Target tree data from preloaded JSON file
-	var targetTreeData = this._treesData["allClimates"];
+	var targetTreeData = this._treesData["moistureOnly"];
         
 	// Insert target tree ring pattern player should try to match
 	this._targetTree = new Tree(this, 650, 250, 'right', targetTreeData);
