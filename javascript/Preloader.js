@@ -67,6 +67,7 @@ TreeRings.Preloader.prototype = {
 		// New buttons March 2016
 		this.load.spritesheet('help_btn_spritesheet', 'assets/images/spritesheets/help_btn_spritesheet.png', 50, 50);
 		this.load.spritesheet('credits_btn_spritesheet', 'assets/images/spritesheets/credits_btn_spritesheet.png', 150, 50);
+		this.load.spritesheet('score_btn_spritesheet', 'assets/images/spritesheets/score_btn_spritesheet.png', 50, 50);
 		
         // 193x71 is the size of each frame.
         this.load.spritesheet('button_spritesheet', 'assets/images/spritesheets/button_sprite_sheet.png', 193, 71);
