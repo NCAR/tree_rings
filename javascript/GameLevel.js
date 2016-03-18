@@ -4,8 +4,11 @@ GameLevel = function(currentGameLevel, sBgImage) {
     this._currentLevel = currentGameLevel;
     this._sBgImage = sBgImage;
 	
-	this._instructions;
-	this._credits;
+	this._helpBtn;
+	this._creditsBtn;
+	
+	//this._instructions;
+	//this._credits;
 	
 	this.sMoisture;
 	this.sTemperature = 'normal';
@@ -74,6 +77,7 @@ GameLevel.prototype.changeScore = function(sWhichChange, points) {
 
 GameLevel.prototype._initScoring = function() {
     //button to add points
+	//var scoreBtn = this.add.button(50, this.game.height - 60, 'help_btn_spritesheet', this._scorePoints, this, 2, 1, 0);
 	var scoreBtn = this.add.button(this.game.width - 200, this.game.height - 160, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
 	//var scoreBtn = this.add.button(this.world.centerX, this.world.centerY, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
 	scoreBtn.name = 'scoreButton';
@@ -95,14 +99,17 @@ GameLevel.prototype._scorePoints = function(pointer) {
 
 GameLevel.prototype._initInstructions = function() {
     // instructions button
-	this._instructions = this.add.text(50, this.game.height-100, "Instructions", { fontSize: '32px', fill: '#000' });
+	this._helpBtn = this.add.button(10, this.game.height - 60, 'help_btn_spritesheet', this._showHelp, this, 2, 1, 0);
+	this._helpBtn.name = 'helpBtn';
+	
+	//this._instructions = this.add.text(50, this.game.height-100, "Instructions", { fontSize: '32px', fill: '#000' });
 	//this._instructions = this.add.text(100, this.world.height-50, "Instructions", { fontSize: '32px', fill: '#000' });
 	//this._instructions.anchor.setTo(0.5, 0.5);
-	this._instructions.inputEnabled = true;
-	this._instructions.events.onInputDown.add(this._showInstructions, this);
+	//this._instructions.inputEnabled = true;
+	//this._instructions.events.onInputDown.add(this._showInstructions, this);
 };
 
-GameLevel.prototype._showInstructions = function(pointer) {
+GameLevel.prototype._showHelp = function(pointer) {
     this._drawDialog('level' + this._currentLevel);
 };
 
@@ -127,11 +134,16 @@ GameLevel.prototype._quitLevel = function(pointer) {
 /////////////
 
 GameLevel.prototype._initCredits = function() {
-    this._credits = this.add.text(50, this.game.height-50, "Credits", { fontSize: '32px', fill: '#000' });
+	var xLoc = this._helpBtn.x + 60;
+	this._creditsBtn = this.add.button(xLoc, this._helpBtn.y, 'credits_btn_spritesheet', this._showCredits, this, 2, 1, 0);
+	this._creditsBtn.name = 'creditsBtn';
+	
+	
+    //this._credits = this.add.text(50, this.game.height-50, "Credits", { fontSize: '32px', fill: '#000' });
 	//this._credits = this.add.text(this.world.width-100, this.world.height-50, "Credits", { fontSize: '32px', fill: '#000' });
 	//this._credits.anchor.setTo(0.5, 0.5);
-	this._credits.inputEnabled = true;
-	this._credits.events.onInputDown.add(this._showCredits, this);
+	//this._credits.inputEnabled = true;
+	//this._credits.events.onInputDown.add(this._showCredits, this);
 };
 
 GameLevel.prototype._showCredits = function(pointer) {
@@ -145,8 +157,10 @@ GameLevel.prototype._showCredits = function(pointer) {
 GameLevel.prototype._drawDialog = function(key) {
 	// pause game and disable the instructions and credits button
 	this.paused = true;
-	this._instructions.inputEnabled = false;
-	this._credits.inputEnabled = false;
+	this._helpBtn.inputEnabled = false;
+	this._creditsBtn.inputEnabled = false;
+	//this._instructions.inputEnabled = false;
+	//this._credits.inputEnabled = false;
 	
 	// draw outline box
 	this.dialogBox = this.add.graphics(0,0);
@@ -175,6 +189,8 @@ GameLevel.prototype._closeDialog = function(){
 	this.dialogCloseBtn.kill();
 	this.dialogText.kill();
 	this.paused = false;
-	this._instructions.inputEnabled = true;
-	this._credits.inputEnabled = true
+	this._helpBtn.inputEnabled = true;
+	this._creditsBtn.inputEnabled = true
+	//this._instructions.inputEnabled = true;
+	//this._credits.inputEnabled = true;
 };
