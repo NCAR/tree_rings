@@ -18,7 +18,7 @@ Graph.prototype.constructor = Graph;
 // Inititalize
 Graph.prototype._init = function() {
 	// Size (x- and y-dimensions) of graph "paper"
-	this.a_paperSize = [400, 150];
+	this.a_paperSize = [450, 150];
 	
 	// Margins between graphing area and surrounding graph 'paper'
 	this._margins = {left: 110, top: 10, right: 10, bottom: 40};

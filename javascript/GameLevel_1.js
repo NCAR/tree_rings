@@ -31,7 +31,7 @@ TreeRings.GameLevel_1.prototype._buildLevel = function() {
 		
 	// Create bar graph of player's climate choices history
 	this._graph = new Graph(this);
-	this._graph.x = 500; this._graph.y = 0;
+	this._graph.x = 450; this._graph.y = 350;
 };
 
 ///////////
