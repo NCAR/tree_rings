@@ -39,16 +39,20 @@ TreeRings.Preloader.prototype = {
 		// End new code for MultiLevel version
 		
 		// For improved multilevel version
-		this.load.image('start_menu_bg', 'assets/images/start_menu_bg_900x500.jpg');
-		this.load.image('replay_menu_bg', 'assets/images/replay_menu_bg_900x500.jpg');
+		this.load.image('start_menu_bg', 'assets/images/start_menu_bg_900x600.jpg');
+		this.load.image('replay_menu_bg', 'assets/images/replay_menu_bg_900x600.jpg');
+		//this.load.image('replay_menu_bg', 'assets/images/replay_menu_bg_900x500.jpg');
+		//this.load.image('start_menu_bg', 'assets/images/start_menu_bg_900x500.jpg');
 		
-		this.load.image('sandbox_bg', 'assets/images/sandbox_bg_900x500.jpg');
+		this.load.image('sandbox_bg', 'assets/images/sandbox_bg_900x600.jpg');
+		//this.load.image('sandbox_bg', 'assets/images/sandbox_bg_900x500.jpg');
 		this.load.image('game_level_4_bg', 'assets/images/game_level_4_bg.png');
 		// End new code for improved multilevel version
 		
 		this.load.image('titlescreen', 'assets/images/TitleBG.jpg');
 		this.load.bitmapFont('desyrel', 'assets/fonts/desyrel.png', 'assets/fonts/desyrel.xml');
-		this.load.image('game_bg', 'assets/images/game_bg_900x500.png');
+		this.load.image('game_bg', 'assets/images/game_bg_900x600.png');
+		//this.load.image('game_bg', 'assets/images/game_bg_900x500.png');
 		//this.load.image('phaser_logo', 'assets/images/phaser_logo.png');
 		//this.load.image('tree_ring_sample', 'assets/images/tree_ring_sample_330x330.png');
 		this.load.image('tree_ring_sample', 'assets/images/tree_ring_sample_02_200x400.png');
