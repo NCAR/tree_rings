@@ -49,6 +49,23 @@
 		["normal", "normal"], 
 		["warm", "wet"]
 	],
+	"sizeTest": [
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"], 
+		["normal", "wet"]
+	],
 	"oak": [
 		["cool", "dry"], 
 		["cool", "normal"], 

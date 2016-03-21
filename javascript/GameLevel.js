@@ -75,17 +75,13 @@ GameLevel.prototype.changeScore = function(sWhichChange, points) {
 
 GameLevel.prototype._initScoring = function() {
     //button to add points
-	//var scoreBtn = this.add.button(50, this.game.height - 60, 'help_btn_spritesheet', this._scorePoints, this, 2, 1, 0);
 	var xLoc = this._quitBtn.x + this._quitBtn.width + 10;
 	var scoreBtn = this.add.button(xLoc, this._helpBtn.y, 'score_btn_spritesheet', this._scorePoints, this, 2, 1, 0);
-	//var scoreBtn = this.add.button(this.game.width - 200, this.game.height - 160, 'button_spritesheet_add_points', this._scorePoints, this, 2, 1, 0);
 	scoreBtn.name = 'scoreButton';
-	//scoreBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
 	
 	// score text
-	xLoc += scoreBtn.width + 10;
-    this._scoreText = this.add.text(xLoc, scoreBtn.y, "Score: " + this.game.score, { fontSize: '32px', fill: '#000' });
-    //this._scoreText = this.add.text(this.world.centerX, this.world.centerY+200, "Score: " + this.game.score, { fontSize: '32px', fill: '#000' });
+	//xLoc += scoreBtn.width + 10;
+    this._scoreText = this.add.text(10, this.game.height - 100, "Score: " + this.game.score, { fontSize: '32px', fill: '#000' });
     //this._scoreText.anchor.setTo(0.5, 0.5);
 };
 

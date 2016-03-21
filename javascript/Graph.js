@@ -63,7 +63,7 @@ Graph.prototype._drawAxes = function() {
 	// X-axis value labels
 	style = { font: "12px Arial", fill: "#000000", align: "center" };
 	//style = { font: "12px Arial", fill: "#000000", align: "center", backgroundColor: "#aaaaaa" };
-	var xAxisValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	var xAxisValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 	var xValuesVerticalLoc = this.a_paperSize[1] - this._margins.bottom;
 	var xValuesMargin = 20; // Indent (on both left and right ends) of first/last value label
 	var xValuesSpacing = (this.a_graphSize[0] - (2 * xValuesMargin))/(xAxisValues.length - 1);
