@@ -23,10 +23,10 @@ TreeRings.ReplayMenu.prototype = {
             fill: "#822a0b",
             align: "center"
         };
-        var level1 = this.add.text(this.world.centerX, this.world.centerY, "Level 1", style);
-        var level2 = this.add.text(this.world.centerX, this.world.centerY + 50, "Level 2", style);
-        var level3 = this.add.text(this.world.centerX, this.world.centerY + 100, "Level 3", style);
-        var level4 = this.add.text(this.world.centerX, this.world.centerY + 150, "Level 4", style);
+        var level1 = this.add.text(this.world.centerX, this.world.centerY, "Level 1 - Moisture", style);
+        var level2 = this.add.text(this.world.centerX, this.world.centerY + 50, "Level 2 - Temperature", style);
+        var level3 = this.add.text(this.world.centerX, this.world.centerY + 100, "Level 3 - Temperature & Moisture", style);
+        var level4 = this.add.text(this.world.centerX, this.world.centerY + 150, "Level 4 - Drought", style);
         var sandBox = this.add.text(this.world.centerX, this.world.centerY + 200, "Sandbox", style);
 
         level1.anchor.setTo(0.5, 0.5);

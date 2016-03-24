@@ -41,18 +41,16 @@ TreeRings.GameLevel_3.prototype._createTrees = function() {
 	var treeLoc = {x: 675, y: 225};
 	
 	// Target tree data from preloaded JSON file
-	var targetTreeData = this._treesData["sizeTest"];
-	//var targetTreeData = this._treesData["allClimates"];
+	//var targetTreeData = this._treesData["sizeTest"];
+	var targetTreeData = this._treesData["allClimates"];
         
 	// Insert target tree ring pattern player should try to match
 	this._targetTree = new Tree(this, treeLoc.x, treeLoc.y, 'right', targetTreeData);
-	//this._targetTree = new Tree(this, 650, 250, 'right', targetTreeData);
 	this.add.existing(this._targetTree);
 	
 	// Create the player's tree that they will add rings to
 	var baseRadius = 0;
 	var playerTreeData = new Array();
 	this._playerTree = new Tree(this, treeLoc.x, treeLoc.y, 'left', playerTreeData);
-	//this._playerTree = new Tree(this, 650, 250, 'left', playerTreeData);
 	this.add.existing(this._playerTree);
 };
