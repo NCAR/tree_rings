@@ -58,3 +58,11 @@ TreeRings.GameLevel_1.prototype._createTrees = function() {
 	this._playerTree = new Tree(this, treeLoc.x, treeLoc.y, 'left', playerTreeData);
 	this.add.existing(this._playerTree);
 };
+
+///////////
+// Score //
+///////////
+
+/*TreeRings.GameLevel_1.prototype.scoreGrow = function() {
+	console.log("You scored some points for growing a new ring!");
+};*/

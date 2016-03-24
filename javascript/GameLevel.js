@@ -45,6 +45,7 @@ GameLevel.prototype.setClimate = function(climate, state){
 
 GameLevel.prototype.addRing = function(){
 	this._playerTree.addRing(this.sTemperature, this.sMoisture);
+	this._scoreGrow();
 };
 
 GameLevel.prototype.removeRing = function(){
@@ -87,6 +88,34 @@ GameLevel.prototype._initScoring = function() {
 
 GameLevel.prototype._scorePoints = function(pointer) {
 	this.changeScore('add', 10*this._currentLevel);
+	this._scoreText.setText("Score: " + this.game.score);
+};
+
+GameLevel.prototype._scoreGrow = function() {
+	//console.log("You scored some points for growing a new ring!");
+	
+	// Get full climate data arrays for player's tree and target tree
+	var playerTreeData = this._playerTree.getRings();
+	var targetTreeData = this._targetTree.getRings();
+	
+	// Current (most recently added) year/ring in player's tree
+	var currentYear = playerTreeData.length;
+	
+	// Climate data for current year (player's and target)
+	var playerYearData = playerTreeData[currentYear - 1];
+	var targetYearData = targetTreeData[currentYear - 1];
+	
+	//console.log("Player data, most recent year = " + playerYearData);
+	//console.log("Target data, most recent year = " + targetYearData);
+	
+	// Check whether player's climate data for most recently added ring
+	// matches the target tree climate data for the same ring
+	if ((playerYearData[0] == targetYearData[0]) && (playerYearData[1] == targetYearData[1])){
+		this.changeScore('add', 100);
+	} else {
+		this.changeScore('subtract', 20);
+	}
+	
 	this._scoreText.setText("Score: " + this.game.score);
 };
 
