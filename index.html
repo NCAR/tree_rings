@@ -22,14 +22,37 @@
     <script src="javascript/MoistureBtnGroup.js"></script>
     <script src="javascript/TemperatureBtnGroup.js"></script>
     <script src="javascript/Graph.js"></script>
+    <script src="libs/d3/d3.min.js"></script>
+    <script src="javascript/GroupedBarChart.js"></script>
     <script src="Instructions.js"></script>
     <script src="Game.js"></script>
 	<style>
 		body {
-			padding: 0;
-			margin: 0;
-			background-color: #ffffff;
-		}
+            padding: 0;
+            margin: 0;
+            background-color: #ffffff;
+            font: 10px sans-serif;
+        }
+        #gameContainer {
+            margin-left: auto;
+            margin-right: auto;
+            position: absolute;
+        }
+        
+        #BarChartSVG {
+            bottom: 1px;
+            position: absolute;
+            right: 1px;
+            background-color:#fff;
+        }
+        
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            stroke-width: 1;
+            shape-rendering: geometricPrecision;
+        }
 	</style>
 </head>
 

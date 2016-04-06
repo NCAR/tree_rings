@@ -8,10 +8,12 @@ TreeRings.Boot = function(game) {
 TreeRings.Boot.prototype = {
 	create: function() {
         this.input.maxPointers = 1;
-		this.stage.disableVisibilityChange = true;
-		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.minWidth = 270;
-		this.scale.minHeight = 480;
+		this.stage.disableVisibilityChange = true;		
+        this.scale.scaleMode = Phaser.ScaleManager.aspectRatio;
+        this.scale.minWidth = 270;
+        this.scale.minHeight = 480;
+        this.game.stage.scale.maxWidth = 900;
+        this.game.stage.scale.maxHeight = 600;
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
 		this.stage.forcePortrait = true;

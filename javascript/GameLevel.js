@@ -19,7 +19,16 @@ GameLevel.prototype.create = function() {
 	this._initCredits();
 	this._initQuitLevel();
 	this._initScoring();
+    this._initGraph();
 };
+GameLevel.prototype._initGraph = function(){
+    var labels = {
+            x:"Year",
+            y1:"Temperature",
+            y2:"Moisture"
+        };
+    this.D3Bar = new D3GroupedBar(500, 200,labels);
+}
 
 GameLevel.prototype.preload = function() {
 	// load the JSON data files for Instructions & Credits dialog boxes and tree ring data
@@ -46,11 +55,42 @@ GameLevel.prototype.setClimate = function(climate, state){
 GameLevel.prototype.addRing = function(){
 	this._playerTree.addRing(this.sTemperature, this.sMoisture);
 	this._scoreGrow();
+    var temperature = null;
+    var moisture = null;
+    switch(this.sTemperature){
+        case 'warm':
+            temperature = 3;
+            break;
+        case 'normal':
+            temperature = 2;
+            break;
+        case 'cool':
+            temperature = 1;
+            break;
+    }
+    switch(this.sMoisture){
+        case 'wet':
+            moisture = 3;
+            break;
+        case 'normal':
+            moisture = 2;
+            break;
+        case 'dry':
+            moisture = 1;
+            break;
+    }
+    
+    var val = {
+        "Temperature": temperature,
+        "Moisture": moisture
+    };
+    this.D3Bar.addValue(val);
 };
 
 GameLevel.prototype.removeRing = function(){
 	if(this._playerTree.getRings().length > 0){
-    	this._playerTree.removeRing();
+    	this._playerTree.removeRing();        
+        this.D3Bar.removeValue();
     };
 };
 
@@ -148,6 +188,9 @@ GameLevel.prototype._initQuitLevel = function() {
 
 GameLevel.prototype._quitLevel = function(pointer) {
     this.state.start('ReplayMenu');
+    if (this.D3Bar) {
+        this.D3Bar.remove();
+    }
 };
 
 /////////////
