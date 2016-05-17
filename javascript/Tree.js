@@ -44,13 +44,13 @@ Tree.prototype.resetTree = function(){
 Tree.prototype.ringTemperature = function(index) {
     switch (index) {
         case 'cool':
-            return 5;
+            return 2; // 5
             break;
         case 'normal':
-            return 7;
+            return 8; // 7
             break;
         case 'warm':
-            return 6;
+            return 5; // 6
             break;
     }
     return 0;
@@ -59,13 +59,13 @@ Tree.prototype.ringTemperature = function(index) {
 Tree.prototype.ringPrecipitation = function(index) {
     switch (index) {
         case 'dry':
-            return 2;
+            return 3; // 2
             break;
         case 'normal':
-            return 5;
+            return 5; // 5
             break;
         case 'wet':
-            return 8;
+            return 7; // 8
             break;
     }
 };
