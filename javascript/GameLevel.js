@@ -21,13 +21,14 @@ GameLevel.prototype.create = function() {
 	this._initScoring();
     this._initGraph();
 };
+
 GameLevel.prototype._initGraph = function(){
     var labels = {
             x:"Year",
             y1:"Temperature",
             y2:"Moisture"
         };
-    this.D3Bar = new D3GroupedBar(500, 200,labels);
+    this.D3Bar = new D3GroupedBar(480, 160, labels);
 }
 
 GameLevel.prototype.preload = function() {

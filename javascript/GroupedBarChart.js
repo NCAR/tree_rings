@@ -16,7 +16,7 @@ var D3GroupedBar = function (width, height, labels) {
     var temperatureFormat = function (d) {
         switch (d) {
         case 1:
-            return 'Dry';
+            return 'Cool';
             break;
         case 2:
             return 'Normal';
@@ -29,7 +29,7 @@ var D3GroupedBar = function (width, height, labels) {
     var moistureFormat = function (d) {
         switch (d) {
         case 1:
-            return 'Cool';
+            return 'Dry';
             break;
         case 2:
             return 'Normal';
@@ -39,6 +39,9 @@ var D3GroupedBar = function (width, height, labels) {
             break;
         }
     };
+	
+	var temperatureColor = '#ff3333';
+	var moistureColor = '#3366ff';
 
     window.d3.margin = {
             top: 40,
@@ -54,11 +57,16 @@ var D3GroupedBar = function (width, height, labels) {
     window.d3.y = d3.scale.linear()
         .range([window.d3.height, 0])
         .domain([0, 3]);
-    window.d3.color = d3.scale.category10();
+    //window.d3.color = d3.scale.category10();
     /*
      window.d3.color = d3.scale.ordinal()
         .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
         */
+	
+	window.d3.color = d3.scale.ordinal()
+        .range([temperatureColor, moistureColor]);
+        //.range(["#ff6666", "#6699ff"]);
+		
     window.d3.xAxis = d3.svg.axis()
         .scale(window.d3.x0)
         .orient("bottom");
@@ -102,6 +110,7 @@ var D3GroupedBar = function (width, height, labels) {
         .text(labels.x);
     window.d3.svgCont.append("g")
         .attr("class", "y axis")
+        .attr("id", "temperatureAxis")
         .attr("transform", "translate(-50,0)")
         .call(window.d3.yAxis1)
         .append("text")
@@ -110,10 +119,12 @@ var D3GroupedBar = function (width, height, labels) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .style("font-weight", "bold")
+        .style("fill", temperatureColor)
         .text(labels.y1);
 
     window.d3.svgCont.append("g")
         .attr("class", "y axis")
+        .attr("id", "moistureAxis")
         .attr("transform", "translate(0,0)")
         .call(window.d3.yAxis2)
         .append("text")
@@ -122,6 +133,7 @@ var D3GroupedBar = function (width, height, labels) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .style("font-weight", "bold")
+        .style("fill", moistureColor)
         .text(labels.y2);
 
     var legend = window.d3.svgCont.selectAll(".legend")
