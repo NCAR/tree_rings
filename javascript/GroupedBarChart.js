@@ -51,7 +51,7 @@ var D3GroupedBar = function (width, height, labels) {
         },
         window.d3.width = width - window.d3.margin.left - window.d3.margin.right,
         window.d3.height = height - window.d3.margin.top - window.d3.margin.bottom;
-    window.d3.x0 = d3.scale.ordinal()
+    window.d3.x0 = d3.scale.ordinal().domain([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
         .rangeRoundBands([0, window.d3.width], .2);
     window.d3.x1 = d3.scale.ordinal();
     window.d3.y = d3.scale.linear()
@@ -67,8 +67,9 @@ var D3GroupedBar = function (width, height, labels) {
         .range([temperatureColor, moistureColor]);
         //.range(["#ff6666", "#6699ff"]);
 		
-    window.d3.xAxis = d3.svg.axis()
+   window.d3.xAxis = d3.svg.axis()
         .scale(window.d3.x0)
+        .ticks(15)
         .orient("bottom");
     window.d3.yAxis1 = d3.svg.axis()
         .scale(window.d3.y)
@@ -173,9 +174,10 @@ D3GroupedBar.prototype.setData = function () {
     });
 
 
-    window.d3.x0.domain(window.d3.data.map(function (d) {
+  /*  window.d3.x0.domain(window.d3.data.map(function (d) {
         return d.Year;
     }));
+    */
     /* window.d3.y.domain([0, d3.max(window.d3.data, function (d) {
          return d3.max(d.years, function (d) {
              return d.value;
@@ -197,9 +199,10 @@ D3GroupedBar.prototype.removeValue = function () {
     this.draw();
 }
 D3GroupedBar.prototype.draw = function () {
-    window.d3.x0.domain(window.d3.data.map(function (d) {
+  /*  window.d3.x0.domain(window.d3.data.map(function (d) {
         return d.Year;
     }));
+    */
     window.d3.x1.domain(window.d3.keys).rangeRoundBands([0, window.d3.x0.rangeBand()]);
 
 
@@ -207,10 +210,10 @@ D3GroupedBar.prototype.draw = function () {
     window.d3.year = window.d3.svgCont.selectAll(".year")
         .data(window.d3.data);
 
-    window.d3.year.transition().attr("transform", function (d) {
+  /*  window.d3.year.transition().attr("transform", function (d) {
         return "translate(" + window.d3.x0(d.Year) + ",0)";
     });
-
+    */
     window.d3.year
         .enter()
         .append("g")
@@ -227,13 +230,14 @@ D3GroupedBar.prototype.draw = function () {
             return d.years;
         });
 
-    window.d3.yearval.transition()
+   /* window.d3.yearval.transition()
         .attr("x", function (d) {
             return window.d3.x1(d.name);
         })
         .attr("width", function (d) {
             return window.d3.x1.rangeBand();
         });
+        */
 
     window.d3.yearval
         .enter()
@@ -256,6 +260,7 @@ D3GroupedBar.prototype.draw = function () {
 
     window.d3.yearval.exit()
         .remove();
+        
 
 }
 D3GroupedBar.prototype.remove = function () {
