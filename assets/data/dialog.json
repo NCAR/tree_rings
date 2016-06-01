@@ -1,7 +1,8 @@
 {
-    "credits": "This simulation and game was developed by Randy Russell and Sharon Clark at the UCAR Center for Science Education.",
+    "credits": "This tree ring simulation and game was developed by Randy Russell and Sharon Clark at the UCAR Center for Science Education.",
     "level1": "Instructions for Level 1.",
     "level2": "Instructions for Level 2.",
     "level3": "Instructions for Level 3.",
-    "level4": "Instructions for Level 4."
+    "level4": "Instructions for Level 4.",
+    "sandbox": "Instructions for sandbox level."
 }
