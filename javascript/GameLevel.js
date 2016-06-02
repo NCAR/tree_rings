@@ -190,16 +190,6 @@ GameLevel.prototype._toggleHelp = function(pointer) {
 	}
 };
 
-/*GameLevel.prototype._initInstructions = function () {
-    // instructions button
-    this._helpBtn = this.add.button(10, this.game.height - 60, 'help_btn_spritesheet', this._showHelp, this, 2, 1, 0);
-    this._helpBtn.name = 'helpBtn';
-};
-
-GameLevel.prototype._showHelp = function (pointer) {
-    this._drawDialog('level' + this._currentLevel);
-};*/
-
 ////////////////
 // Quit Level //
 ////////////////
@@ -248,62 +238,3 @@ GameLevel.prototype._toggleCredits = function(pointer) {
 		this._creditsDialogBox.visible = true;
 	}
 };
-
-/*
-
-GameLevel.prototype._initCredits = function () {
-    var xLoc = this._helpBtn.x + this._helpBtn.width + 10;
-    this._creditsBtn = this.add.button(xLoc, this._helpBtn.y, 'credits_btn_spritesheet', this._showCredits, this, 2, 1, 0);
-    this._creditsBtn.name = 'creditsBtn';
-};
-
-GameLevel.prototype._showCredits = function (pointer) {
-    this._drawDialog('credits');
-};*/
-
-////////////////////////////////////////////
-// Dialog box for Credits or Instructions //
-////////////////////////////////////////////
-
-/*GameLevel.prototype._drawDialog = function (key) {
-    // pause game and disable the instructions and credits button
-    this.paused = true;
-    this._helpBtn.inputEnabled = false;
-    this._creditsBtn.inputEnabled = false;
-
-    // draw outline box
-    this.dialogBox = this.add.graphics(0, 0);
-    this.dialogBox.beginFill(0x3b639a);
-    this.dialogBox.lineStyle(2, 0x2d5082, 1);
-    this.dialogBox.drawRect(200, 50, 500, 400);
-
-    // draw text
-    var style = {
-        font: 'bold 20pt Arial',
-        fill: 'white',
-        align: 'left',
-        wordWrap: true,
-        wordWrapWidth: 450
-    };
-    this.dialogText = this.add.text(this.world.centerX, this.world.centerY, this._dialog[key], style);
-    this.dialogText.anchor.set(0.5, 0.5);
-    this.dialogText.setShadow(2, 2, 'rgba(0,0,0,0.5)', 0);
-
-    //draw close button
-    this.dialogCloseBtn = this.add.button(this.world.centerX, this.world.centerY + 150, 'button_spritesheet_close_dialog', this._closeDialog, this, 2, 1, 0);
-    this.dialogCloseBtn.anchor.setTo(0.5, 0.5);
-    this.dialogCloseBtn.name = 'closeButton';
-    this.dialogCloseBtn.anchor.setTo(0.5, 0.5); // anchored on the center of the button
-};
-
-GameLevel.prototype._closeDialog = function () {
-    // kill off the dialog box, text, and close button
-    // re-enable the instructions and credits button
-    // unpause the game
-    this.dialogBox.kill();
-    this.dialogCloseBtn.kill();
-    this.dialogText.kill();
-    this.paused = false;
-    this._helpBtn.inputEnabled = true;
-    this._creditsBtn.inputEnabled = true
-};*/
