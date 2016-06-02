@@ -1,6 +1,8 @@
 TreeRings.SandBox = function(game) {
 	this.game = game; // keep reference to main game object
 	
+	this._currentLevel = 0;
+	
 	this._helpBtn;
 	this._helpDialogBox;
 	

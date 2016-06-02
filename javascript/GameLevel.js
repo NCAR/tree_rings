@@ -6,7 +6,9 @@ GameLevel = function (currentGameLevel, sBgImage) {
 
     this._quitBtn;
     this._helpBtn;
+	this._helpDialogBox;
     this._creditsBtn;
+	this._creditsDialogBox;
 
     this.sMoisture;
     this.sTemperature = 'normal';
@@ -15,7 +17,8 @@ GameLevel = function (currentGameLevel, sBgImage) {
 GameLevel.prototype.create = function () {
     this.add.image(0, 0, this._sBgImage);
 
-    this._initInstructions();
+    this._initHelp();
+    //this._initInstructions();
     this._initCredits();
     this._initQuitLevel();
     this._initScoring();
@@ -157,11 +160,37 @@ GameLevel.prototype._scoreGrow = function () {
     this._scoreText.setText("Score: " + this.game.score);
 };
 
-//////////////////
-// Instructions //
-//////////////////
+//////////
+// Help //
+//////////
 
-GameLevel.prototype._initInstructions = function () {
+GameLevel.prototype._initHelp = function() {
+    // help button using parent DialogBox class
+	var xLoc = 10;
+	var yLoc = this.game.height - 60;
+	this._helpBtn = this.add.button(xLoc, yLoc, 'help_btn_spritesheet', this._toggleHelp, this, 2, 1, 0);
+	this._helpBtn.name = 'helpBtn';
+	
+	// Help dialog box
+	this._helpDialogBox = new HelpDialog(this);
+	this._helpDialogBox.visible = false;
+};
+
+GameLevel.prototype._toggleHelp = function(pointer) {
+	this._creditsDialogBox.visible = false;
+	this.world.bringToTop(this._helpDialogBox);
+	console.log("Help dialog z-index = " + this._helpDialogBox.z);
+	//var zIndexGraph = document.getElementById("BarChartSVG").style.zIndex;
+	//console.log("Graph z-index = " + zIndexGraph);
+	
+    if (this._helpDialogBox.visible) {
+		this._helpDialogBox.visible = false;
+	} else {
+		this._helpDialogBox.visible = true;
+	}
+};
+
+/*GameLevel.prototype._initInstructions = function () {
     // instructions button
     this._helpBtn = this.add.button(10, this.game.height - 60, 'help_btn_spritesheet', this._showHelp, this, 2, 1, 0);
     this._helpBtn.name = 'helpBtn';
@@ -169,7 +198,7 @@ GameLevel.prototype._initInstructions = function () {
 
 GameLevel.prototype._showHelp = function (pointer) {
     this._drawDialog('level' + this._currentLevel);
-};
+};*/
 
 ////////////////
 // Quit Level //
@@ -195,6 +224,33 @@ GameLevel.prototype._quitLevel = function (pointer) {
 // Credits //
 /////////////
 
+//////////
+
+GameLevel.prototype._initCredits = function() {
+	// Credits button
+	var xLoc = this._helpBtn.x + this._helpBtn.width + 10;;
+	var yLoc = this._helpBtn.y;
+	this._creditsBtn = this.add.button(xLoc, yLoc, 'credits_btn_spritesheet', this._toggleCredits, this, 2, 1, 0);
+	this._creditsBtn.name = 'creditsBtn';
+	
+	// Credits dialog box
+	this._creditsDialogBox = new CreditsDialog(this);
+	this._creditsDialogBox.visible = false;
+};
+
+GameLevel.prototype._toggleCredits = function(pointer) {
+	this._helpDialogBox.visible = false;
+	this.world.bringToTop(this._creditsDialogBox);
+	
+	if (this._creditsDialogBox.visible) {
+		this._creditsDialogBox.visible = false;
+	} else {
+		this._creditsDialogBox.visible = true;
+	}
+};
+
+/*
+
 GameLevel.prototype._initCredits = function () {
     var xLoc = this._helpBtn.x + this._helpBtn.width + 10;
     this._creditsBtn = this.add.button(xLoc, this._helpBtn.y, 'credits_btn_spritesheet', this._showCredits, this, 2, 1, 0);
@@ -203,13 +259,13 @@ GameLevel.prototype._initCredits = function () {
 
 GameLevel.prototype._showCredits = function (pointer) {
     this._drawDialog('credits');
-};
+};*/
 
 ////////////////////////////////////////////
 // Dialog box for Credits or Instructions //
 ////////////////////////////////////////////
 
-GameLevel.prototype._drawDialog = function (key) {
+/*GameLevel.prototype._drawDialog = function (key) {
     // pause game and disable the instructions and credits button
     this.paused = true;
     this._helpBtn.inputEnabled = false;
@@ -250,4 +306,4 @@ GameLevel.prototype._closeDialog = function () {
     this.paused = false;
     this._helpBtn.inputEnabled = true;
     this._creditsBtn.inputEnabled = true
-};
+};*/
