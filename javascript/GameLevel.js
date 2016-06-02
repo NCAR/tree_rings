@@ -234,7 +234,9 @@ GameLevel.prototype._toggleCredits = function(pointer) {
 	
 	if (this._creditsDialogBox.visible) {
 		this._creditsDialogBox.visible = false;
+        document.getElementById('BarChartSVG').style.display = '';
 	} else {
 		this._creditsDialogBox.visible = true;
+        document.getElementById('BarChartSVG').style.display = 'none'
 	}
 };
